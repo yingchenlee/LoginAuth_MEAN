@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='check.js') }}"></script>
+</head>
+
+<body>
+    <div class="container">
+        
+        <h3>Welcome!</h3>
+            <div class="row">               
+
+                <div class="container col-md-6 col-lg-6 d-inline-block">
+                    <h5>Register here:</h5>
+                    <!-- tip to easily see objects printed in full instead of [object Object] -->
+                    <%- JSON.stringify(messages) %> 
+                    <!-- based on the structure of your messages, determine how to display them -->
+                    <% if(messages.registration) { %>
+                        <% for (var x of messages.registration) { %>
+                        <h3><%= x %></h3>
+                        <% } %>
+                    <% } %>
+                    <form action="/reg" method="POST" id="regForm">
+                        <label for="fname">First Name</label>
+                        <input name="fname" type="text" id="fname" class="form-control">
+                        <label for="lname">Last Name</label>
+                        <input name="lname" type="text" id="lname" class="form-control">
+                        
+                        <label for="remail">Email</label>
+                        <div id="checkMsg"></div>
+                        <input name="remail" id="remail" type="text" class="email form-control">
+
+                        <label for="rpassword">Password</label>
+                        <input name="rpassword" id="password" type="password" class="form-control">
+                        <label for="confirm_password">Confirm Password</label>
+                        <input name="confirm_password" id="confirm_password" type="password" class="form-control">
+
+                        <label for="birthday">Birthday:</label>
+                        <input name="birthday" id="birthday" type="date" class="form-control">
+                        <br>
+                        <button class="btn btn-primary" type="submit" name="action">Register
+                        </button>
+                    </form>
+                </div>
+                <div class="container col-md-6 col-lg-6 d-inline-block">
+                    <h5>Login here:</h5>
+                    <form class="form" action="/login" method="post">
+                        <label for="lemail">Email</label>
+                        <input name="lemail" id="lemail" type="email" class="form-control">
+                        <label for="lpassword">Password</label>
+                        <input name="lpassword" id="lpassword" type="password" class="form-control">
+                        <br>
+                        <button class="btn btn-primary" type="submit" name="action">Log in</button>
+                    </form>
+                    <a href="/success">login CHEAT</a>
+                </div>
+            </div>
+        
+    </div>
+
+</body>
+
+</html>
